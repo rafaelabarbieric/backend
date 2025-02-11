@@ -12,7 +12,7 @@ class Cidade(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.nome
+        return F"{self.nome} ({self.estado.sigla})"
     
 class Pessoa(models.Model):
     nome = models.CharField(max_length=50)
@@ -20,3 +20,10 @@ class Pessoa(models.Model):
     email = models.EmailField(max_length=100)
     nasc = models.DateField
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.nome
+    
+    class Meta:
+        verbose_name = "Pessoa"
+        verbose_name_plural = "Pessoas"
